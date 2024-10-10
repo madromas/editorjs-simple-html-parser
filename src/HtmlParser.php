@@ -480,10 +480,19 @@ class HtmlParser
 	 */
 	private function parseVideo($node, $styles) {
 
+$withBorder = in_array('withborder', $styles) ? true : false;
+		$withBackground = in_array('withbackground', $styles) ? true : false;
+		$stretched = in_array('stretched', $styles) ? true : false;
+
 		$block['type'] = 'video';
-		$block['data']['url'] = $this->setInnerHtml($node);
-		
+		$block['data']['url'] = $node->getElementsByTagName('video')->item(0)->getAttribute('src');
+		$block['data']['caption'] = $this->setInnerHtml($node->getElementsByTagName('figcaption')->item(0));
+		$block['data']['withBorder'] = $withBorder;
+		$block['data']['withBackground'] = $withBackground;
+		$block['data']['stretched'] = $stretched;
+
 		return $block;
+
 	}
 	
 	/**
