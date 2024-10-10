@@ -19,6 +19,7 @@ Package | Key | Main CSS Class<br>(with default prefix) | Additional / modificat
 `@editorjs/simple-image` | `simpleImage` | `.prs-image` | additional:<br>`.prs_withborder`<br>`.prs_withbackground`<br>`.prs_stretched`
 `@editorjs/embed` | `embed` | `.prs-embed` | additional:<br>`.prs_youtube`<br>`.prs_codepen`<br>`.prs_vimeo`
 `@editorjs/link` | `linkTool` | `.prs-linktool` | additional:<br>`.prs_title`<br>`.prs_description`<br>`.prs_sitename`
+`@editorjs/simple-video-editorjs` | `SimpleVideo` | `.prs-video` | additional:<br>`stretched`<br>`autoplay`<br>`muted`<br>`controls`
 `@editorjs/delimiter` | `delimiter` | `.prs-delimiter` |
 `editorjs-alert` | `alert` | `.prs-alert` | alignment:<br>`.prs_left`<br>`.prs_right`<br>`.prs_center`<br>additional:<br>`.prs_primary`<br>`.prs_secondary`<br>`.prs_info`<br>`.prs_success`<br>`.prs_warning`<br>`.prs_danger`<br>`.prs_light`<br>`.prs_dark`
 `@editorjs/warning` | `warning` | `.prs-warning` |
@@ -139,6 +140,14 @@ Return Editor.js content blocks
         </tr>
     </tbody>
 </table>
+```
+
+##### Video
+
+```html
+<div class="prs-video">
+    <video src="" controls muted autoplay stretched></video>
+</div>
 ```
 
 ##### Code
