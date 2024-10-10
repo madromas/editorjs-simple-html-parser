@@ -240,11 +240,22 @@ class Parser
 
     private function parseVideo($block)
     {
-        $class = $this->addClass($block->type);
 
-        $div = $this->dom->createElement('div');
+        $figure = $this->dom->createElement('div');
 
-        $div->setAttribute('class', $class);
+        $attrs = [];
+
+        $caption = (!empty($block->data->caption)) ? $block->data->caption : '';
+
+        if ($block->data->withBorder) $attrs[] = "withborder";
+        if ($block->data->withBackground) $attrs[] = "withbackground";
+        if ($block->data->stretched) $attrs[] = "stretched";
+
+        $style = (count($attrs) > 0) ? implode(' ', $attrs) : false;
+
+        $class = $this->addClass($block->type, false, $style);
+
+        $figure->setAttribute('class', $class);
 
         $video = $this->dom->createElement('video');
 
@@ -253,13 +264,20 @@ class Parser
         $video->setAttribute('autoplay', $block->data->autoplay);
         $video->setAttribute('muted', $block->data->muted);
         $video->setAttribute('stretched', $block->data->stretched);
-        
-        $video->appendChild($div);
-        
-        $video->appendChild($this->html5->loadHTMLFragment($block->data->url));
 
-        $this->dom->appendChild($video);
+        $figure->appendChild($video);
+
+        $video->appendChild($this->html5->parseFragment($block->data->url));
+
+        if (!empty($caption)) {
+            $figCaption = $this->dom->createElement('figcaption');
+            $figCaption->appendChild($this->html5->loadHTMLFragment($caption));
+            $figure->appendChild($figCaption);
+        }
+
+        $this->dom->appendChild($figure);
     }
+
     
     private function parseRaw($block)
     {
