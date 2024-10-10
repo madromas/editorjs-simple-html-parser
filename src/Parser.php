@@ -238,6 +238,29 @@ class Parser
         return $iframe;
     }
 
+    private function parseVideo($block)
+    {
+        $class = $this->addClass($block->type);
+
+        $div = $this->dom->createElement('div');
+
+        $div->setAttribute('class', $class);
+
+        $video = $this->dom->createElement('video');
+
+        $video->setAttribute('src', $block->data->url);
+        $video->setAttribute('controls', $block->data->controls);
+        $video->setAttribute('autoplay', $block->data->autoplay);
+        $video->setAttribute('muted', $block->data->muted);
+        $video->setAttribute('stretched', $block->data->stretched);
+        
+        $video->appendChild($div);
+        
+        $video->appendChild($this->html5->loadHTMLFragment($block->data->url));
+
+        $this->dom->appendChild($video);
+    }
+    
     private function parseRaw($block)
     {
         $class = $this->addClass($block->type);
