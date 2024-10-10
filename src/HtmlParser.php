@@ -471,6 +471,21 @@ class HtmlParser
 		return $block;
 	}
 
+         /**
+	 * Video Parser
+	 * 
+	 * @param object $node
+	 * @param array $styles
+	 * @return array
+	 */
+	private function parseVideo($node, $styles) {
+
+		$block['type'] = 'video';
+		$block['data']['url'] = $this->setInnerHtml($node);
+		
+		return $block;
+	}
+	
 	/**
 	 * Embed Parser
 	 * 
